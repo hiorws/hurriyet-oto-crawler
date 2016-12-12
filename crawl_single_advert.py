@@ -35,14 +35,23 @@ def get_advert_details(advert_page_source):
     advert_creds['ilan_no'] = advert_no
 
     # marka model
-    brand_div = bs.find(class_="detay_markaTip")
-    brand = brand_div.findAll("dd")[0]
-    brand = brand.get_text().encode("utf-8")
-    brand = str(brand).decode('unicode_escape').encode('ascii', 'ignore')
-    brand = brand.split(":")[-1]
+    brand_a = bs.find("a", {"id": "ContentPlaceHolder1_lnkBrand"})
+    brand = brand_a.text
+    model_a = bs.find("a", {"id": "ContentPlaceHolder1_lnkModel"})
+    model = model_a.text
+    seri_a = bs.find("a", {"id": "ContentPlaceHolder1_lnkSeries"})
+    seri = seri_a.text
+    # brand_div = bs.find(class_="detay_markaTip")
+    # brand = brand_div.findAll("dd")[0]
+    # brand = brand.get_text().encode("utf-8")
+    # brand = str(brand).decode('unicode_escape').encode('ascii', 'ignore')
+    # brand = brand.split(":")[-1]
     # print(brand)
 
-    advert_creds['marka_model'] = brand
+    # advert_creds['marka_model'] = brand
+    advert_creds['marka'] = brand
+    advert_creds['model'] = model
+    advert_creds['seri'] = seri
 
     # fiyat
     price_div = bs.find(class_="fiyat_isim")
