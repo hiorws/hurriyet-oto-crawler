@@ -15,7 +15,7 @@ if __name__ == "__main__":
                      "Garanti", "İlan Tarihi", "Kilometre", "Yakıt Tipi", "Kapı Sayısı"]
         writer.writerow(label_row)
 
-    for url in tqdm(model_advert_list[:10]):
+    for url in tqdm(model_advert_list):
         advert_urls = get_advert_urls(url)
         all_urls.extend(advert_urls)
         output_list = list()
