@@ -15,7 +15,7 @@ if __name__ == "__main__":
         writer.writerow(label_row)
 
     output_list = list()
-    for url in tqdm(model_advert_list[:20]):
+    for url in tqdm(model_advert_list):
         advert_urls = get_advert_urls(url)
         for model_url in advert_urls:
             page_source = get_page_source(model_url)
@@ -23,7 +23,7 @@ if __name__ == "__main__":
             output = [advert["ilan_no"], advert["marka"], advert["model"], advert["seri"], advert["fiyat"],
                       advert["model_yili"], advert["kasa_tipi"], advert["vites_tipi"], advert["renk"],
                       advert["garanti"],
-                      advert["ilan_tarihi"], advert["km"], advert["yakit_tipi"], advert"kapi_sayisi"]
+                      advert["ilan_tarihi"], advert["km"], advert["yakit_tipi"], advert["kapi_sayisi"]]
             with open("sample_output.csv", "a") as output_file:
                 writer = csv.writer(output_file)
                 writer.writerow(output)
