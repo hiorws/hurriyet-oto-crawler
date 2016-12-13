@@ -56,7 +56,7 @@ def get_advert_details(advert_page_source):
     # fiyat
     price_div = bs.find(class_="fiyat_isim")
     price = price_div.find("strong", id="ContentPlaceHolder1_lblPrice").get_text()
-    price = price
+    price = str(price).replace(".", "")
 
     advert_creds['fiyat'] = price
 
@@ -113,6 +113,7 @@ def get_advert_details(advert_page_source):
     advert_date = detail_value[9].get_text().encode("utf-8")
     advert_date = str(advert_date).decode('unicode_escape').encode('ascii', 'ignore')
     advert_date = advert_date.split(":")[-1]
+    advert_date = advert_date.replace(".", "/")
 
     advert_creds['ilan_tarihi'] = advert_date
 
@@ -124,6 +125,7 @@ def get_advert_details(advert_page_source):
     kilometer = detail_value[0].get_text().encode("utf-8")
     kilometer = str(kilometer).decode('unicode_escape').encode('ascii', 'ignore')
     kilometer = kilometer.split(":")[-1].split(" km")[0]
+    kilometer = str(kilometer).replace(".", "")
 
     advert_creds['km'] = kilometer
 
@@ -133,6 +135,13 @@ def get_advert_details(advert_page_source):
     fuel_type = fuel_type.split(":")[-1]
 
     advert_creds['yakit_tipi'] = fuel_type
+
+    # kapi sayisi
+    door_count = detail_value[2].get_text().encode("utf-8")
+    door_count = str(door_count).decode('unicode_escape').encode('ascii', 'ignore')
+    door_count = door_count.split(":")[-1]
+
+    advert_creds['kapi_sayisi'] = door_count
 
     return advert_creds
 
