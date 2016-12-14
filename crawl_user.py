@@ -16,6 +16,7 @@ if __name__ == "__main__":
         output_list = list()
         for url in tqdm(model_advert_list):
             try:
+
                 advert_urls = get_advert_urls(url)
                 for model_url in advert_urls:
                     page_source = get_page_source(model_url)
@@ -25,5 +26,8 @@ if __name__ == "__main__":
                               advert["garanti"],
                               advert["ilan_tarihi"], advert["km"], advert["yakit_tipi"], advert["kapi_sayisi"]]
                     writer.writerow(output)
+                    output_file.flush()
+            except KeyboardInterrupt:
+                exit(1)
             except:
                 pass
