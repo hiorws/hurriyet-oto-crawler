@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -20,7 +19,7 @@ def get_advert_details(advert_page_source):
     """
         takes source code of a product page and return it's information as a dictionary
 
-        :param html_source:
+        :param advert_page_source:
         :return product(dict):
         """
     bs = BeautifulSoup(advert_page_source, "html.parser")
@@ -73,35 +72,35 @@ def get_advert_details(advert_page_source):
     #     pass
 
     # model yili
-    model_year = detail_value[0].get_text().encode("utf-8")
+    model_year = detail_value[0].get_text()
     model_year = str(model_year)[-4:].strip()
 
     advert_creds['model_yili'] = model_year
 
     # kasa tipi
-    case_type = detail_value[1].get_text().encode("utf-8")
-    case_type = str(case_type).decode('unicode_escape').encode('ascii', 'ignore')
+    case_type = detail_value[1].get_text()
+    # case_type = str(case_type).decode('unicode_escape').encode('ascii', 'ignore')
     case_type = case_type.split(":")[-1]
 
     advert_creds['kasa_tipi'] = case_type
 
     # vites tipi
-    gear_type = detail_value[2].get_text().encode("utf-8")
-    gear_type = str(gear_type).decode('unicode_escape').encode('ascii', 'ignore')
+    gear_type = detail_value[2].get_text()
+    # gear_type = str(gear_type).decode('unicode_escape').encode('ascii', 'ignore')
     gear_type = gear_type.split(":")[-1]
 
     advert_creds['vites_tipi'] = gear_type
 
     # renk
-    color = detail_value[3].get_text().encode("utf-8")
-    color = str(color).decode('unicode_escape').encode('ascii', 'ignore')
+    color = detail_value[3].get_text()
+    # color = str(color).decode('unicode_escape').encode('ascii', 'ignore')
     color = color.split(":")[-1]
 
     advert_creds['renk'] = color
 
     # garanti
-    guarantee = detail_value[7].get_text().encode("utf-8")
-    guarantee = str(guarantee).decode('unicode_escape').encode('ascii', 'ignore')
+    guarantee = detail_value[7].get_text()
+    # guarantee = str(guarantee).decode('unicode_escape').encode('ascii', 'ignore')
     guarantee = guarantee.split(":")[-1]
 
     if guarantee.startswith("H"):
@@ -110,8 +109,8 @@ def get_advert_details(advert_page_source):
         advert_creds['garanti'] = "Evet"
 
     # ilan tarihi
-    advert_date = detail_value[9].get_text().encode("utf-8")
-    advert_date = str(advert_date).decode('unicode_escape').encode('ascii', 'ignore')
+    advert_date = detail_value[9].get_text()
+    # advert_date = str(advert_date).decode('unicode_escape').encode('ascii', 'ignore')
     advert_date = advert_date.split(":")[-1]
     advert_date = advert_date.replace(".", "/")
 
@@ -122,23 +121,23 @@ def get_advert_details(advert_page_source):
     detail_value = advert_detail_div.findAll("dd")
 
     # KM
-    kilometer = detail_value[0].get_text().encode("utf-8")
-    kilometer = str(kilometer).decode('unicode_escape').encode('ascii', 'ignore')
+    kilometer = detail_value[0].get_text()
+    # kilometer = str(kilometer).decode('unicode_escape').encode('ascii', 'ignore')
     kilometer = kilometer.split(":")[-1].split(" km")[0]
     kilometer = str(kilometer).replace(".", "")
 
     advert_creds['km'] = kilometer
 
     # yakit tipi
-    fuel_type = detail_value[1].get_text().encode("utf-8")
-    fuel_type = str(fuel_type).decode('unicode_escape').encode('ascii', 'ignore')
+    fuel_type = detail_value[1].get_text()
+    # fuel_type = str(fuel_type).decode('unicode_escape').encode('ascii', 'ignore')
     fuel_type = fuel_type.split(":")[-1]
 
     advert_creds['yakit_tipi'] = fuel_type
 
     # kapi sayisi
-    door_count = detail_value[2].get_text().encode("utf-8")
-    door_count = str(door_count).decode('unicode_escape').encode('ascii', 'ignore')
+    door_count = detail_value[2].get_text()
+    # door_count = str(door_count).decode('unicode_escape').encode('ascii', 'ignore')
     door_count = door_count.split(":")[-1]
 
     advert_creds['kapi_sayisi'] = door_count
